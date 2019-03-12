@@ -1,0 +1,78 @@
+version: '2'
+
+services:
+  #mysql:
+  #  image: mysql:latest
+  #  ports:
+  #    - "33061:3306"
+  #  command: --init-file /data/application/init.sql
+  #  volumes:
+  #    - ./init.sql:/data/application/init.sql
+  #  environment:
+  #    MYSQL_ROOT_PASSWORD: root
+  #    MYSQL_ROOT_PASSWORD: secret
+  #    MYSQL_DATABASE: homestead
+  #    MYSQL_USER: root
+  #    MYSQL_PASSWORD: secret
+
+      #Для подъема консоли внутри докера mysql -u root -p
+      #docker container exec -it d91da621814e bash
+  mssql: 
+    image: microsoft/mssql-server-linux:latest
+    ports:
+      - "1433:1433"
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Qwer1234
+      - MSSQL_PID=Express
+    networks:
+      app_net:
+        ipv4_address: 172.16.238.2
+  oracle:
+    image: docker-oracle-xe-11g:latest
+    ports:
+      - "1521:1521"
+    environment:
+      - ORACLE_ALLOW_REMOTE=true
+    networks:
+      app_net:
+        ipv4_address: 172.16.238.3
+  cloudera:
+    image: cloudera_configured:latest
+    ports:
+         - "50070:50070"
+         - "11000:11000"
+         - "19888:19888"
+         - "18088:18088"
+         - "18089:18089"
+         - "8042:8042"
+         - "8888:8888"
+         - "8088:8088"
+         - "7180:7180"
+         - "8032:8032"
+         - "8033:8033"
+         - "8030:8030"
+         - "8031:8031"
+         - "8090:8090"
+         - "8020:8020"
+    mem_limit: 4G
+    mem_reservation: 2G
+    memswap_limit: 8G
+    hostname: "quickstart.cloudera"
+    privileged: true
+    tty: true
+    stdin_open: true
+    #volumes:
+    #  - some_host_os_path:some_guest_os_path
+    command: "/usr/bin/docker-quickstart"
+    networks:
+      app_net:
+        ipv4_address: 172.16.238.4
+networks:
+  app_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.16.238.0/24
+          gateway: 172.16.238.1

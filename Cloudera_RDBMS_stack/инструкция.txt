@@ -1,0 +1,42 @@
+1. Чтобы поднялся контейнер с ораклом, необходимо сначала собрать образ, для этого необходимо:
+
+    a. Склонировать репозиторий:
+        git clone https://github.com/wnameless/docker-oracle-xe-11g.git
+
+    b. Перейти в директорию и выполнить команду:
+        docker build --tag=docker-oracle-xe-11g .
+
+    Создать контейнер вне docker compose можно следующей командой:
+        docker run -d -p 1521:1521 -e ORACLE_ALLOW_REMOTE=true docker-oracle-xe-11g
+
+    Данные подключения к базе:
+        hostname: localhost
+        port: 1521
+        sid: xe
+        username: system
+        password: oracle
+
+2. Чтобы поднялся контейнер с клоудерой, необходимо импортировать образ командой:
+        docker load -i *your_path*
+
+    Параметр volumes: - some_host_os_path:some_guest_os_path - путь к шаре на хосте и гостевой ос соответственно,
+     работает в обе стороны.
+
+    Адрес yarn:
+    http://localhost:8088/cluster
+
+    Адрес hue:
+    http://localhost:8888/accounts/login/?next=/
+
+    Адрес cloudera manager:
+    http://localhost:7180/cmf/login
+
+    username: cloudera
+    password: cloudera
+
+3. Команды:
+    docker-compose-up (первичный запуск)
+    docker-compose-down (остановка с удалением контейнеров, сетей и пр.)
+
+    docker-compose-start (запуск контейнеров)
+    docker-compose-stop (остановка контейнеров)
