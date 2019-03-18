@@ -1,0 +1,4 @@
+version 1
+
+1. Docker необходимо доработать установку докера при скачке
+2. Билд образа можно сделать так: # docker image build -t customopenshift .
