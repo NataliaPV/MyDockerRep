@@ -1,7 +1,8 @@
 
 # # How to execute docker run -it devdockerdevelop bash
-FROM ubuntu:18.04 as system
+#FROM ubuntu:18.04 as system
 
+FROM dorowu/ubuntu-desktop-lxde-vnc
 RUN apt update
 RUN apt install -y git
 RUN apt install -y python3.5
