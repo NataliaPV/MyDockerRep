@@ -30,6 +30,7 @@ WORKDIR /gitclone/LocalProjectCore/
 RUN wget www.scala-lang.org/files/archive/scala-2.11.8.deb
 RUN dpkg -i scala-2.11.8.deb
 RUN rm scala-2.11.8.deb
+WORKDIR /gitclone/DevOpsForDev/
 RUN apt-get install -y cron
 ADD crontab /etc/cron.d/cron
 RUN chmod 0644 /etc/cron.d/cron
