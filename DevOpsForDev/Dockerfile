@@ -32,7 +32,7 @@ RUN dpkg -i scala-2.11.8.deb
 RUN rm scala-2.11.8.deb
 RUN apt-get install -y cron
 WORKDIR /gitclone/ProjectCore/
-RUN crontab -l */5 * * * * ~/bash crongitpush.sh
+RUN crontab root */5 * * * * ~/bash crongitpush.sh
 
 # mvn clean compile - только компиляция
 # mvn clean compile assembly:single - сборка толстого джарника
