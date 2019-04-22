@@ -25,11 +25,13 @@ RUN git clone https://github.com/NataliaPV/ScalaMainRep.git /gitclone/ProjectCor
 WORKDIR /gitclone/ProjectCore/
 RUN mkdir /gitclone/LocalProjectCore/
 RUN cp -r lib pom.xml src /gitclone/LocalProjectCore/
-RUN cp -r /gitclone/ProjectCore/crongitpush.sh  /gitclone/LocalProjectCore/crongitpush.sh
+#RUN cp -r /gitclone/ProjectCore/crongitpush.sh  /gitclone/LocalProjectCore/crongitpush.sh
 WORKDIR /gitclone/LocalProjectCore/
 RUN wget www.scala-lang.org/files/archive/scala-2.11.8.deb
 RUN dpkg -i scala-2.11.8.deb
 RUN rm scala-2.11.8.deb
+WORKDIR /gitclone/ProjectCore/
 RUN crontab -l */5 * * * * ~/bash crongitpush.sh
+
 # mvn clean compile - только компиляция
 # mvn clean compile assembly:single - сборка толстого джарника
