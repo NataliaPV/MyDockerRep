@@ -31,8 +31,9 @@ RUN wget www.scala-lang.org/files/archive/scala-2.11.8.deb
 RUN dpkg -i scala-2.11.8.deb
 RUN rm scala-2.11.8.deb
 RUN apt-get install -y cron
-WORKDIR /gitclone/ProjectCore/
-RUN crontab root */5 * * * * ~/bash crongitpush.sh
-
+ADD crontab /etc/cron.d/cron
+RUN chmod 0644 /etc/cron.d/cron
+RUN crontab /etc/cron.d/cron
+CMD cron -f
 # mvn clean compile - только компиляция
 # mvn clean compile assembly:single - сборка толстого джарника
