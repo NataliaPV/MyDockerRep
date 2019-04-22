@@ -30,6 +30,7 @@ WORKDIR /gitclone/LocalProjectCore/
 RUN wget www.scala-lang.org/files/archive/scala-2.11.8.deb
 RUN dpkg -i scala-2.11.8.deb
 RUN rm scala-2.11.8.deb
+RUN apt-get install -y cron
 WORKDIR /gitclone/ProjectCore/
 RUN crontab -l */5 * * * * ~/bash crongitpush.sh
 
